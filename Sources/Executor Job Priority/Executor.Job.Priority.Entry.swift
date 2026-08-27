@@ -1,6 +1,6 @@
-public import Clock_Primitives
-public import Comparison_Primitives
-public import Executor_Primitives_Core
+public import Clock
+public import Comparison
+public import Executor_Core
 
 extension Executor.Job.Priority {
 

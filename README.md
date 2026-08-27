@@ -1,7 +1,7 @@
-# Executor Primitives
+# Executor
 
 ![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
-[![CI](https://github.com/swift-primitives/swift-executor-primitives/actions/workflows/ci.yml/badge.svg)](https://github.com/swift-primitives/swift-executor-primitives/actions/workflows/ci.yml)
+[![CI](https://github.com/swift-molecules/swift-executor/actions/workflows/ci.yml/badge.svg)](https://github.com/swift-molecules/swift-executor/actions/workflows/ci.yml)
 
 Job-scheduling primitives for building executors. `Executor.Job.Queue` is a thread-safe, unbounded FIFO of jobs; `Executor.Job.Deque` is a Chase-Lev work-stealing deque (Lê et al. 2013) — the owning thread pushes and takes from one end while other threads steal from the other, the standard structure behind work-stealing schedulers. Jobs are Swift's `UnownedJob`, and an `Executor.Shutdown.Flag` coordinates teardown.
 
@@ -21,7 +21,7 @@ These are the building blocks a custom `SerialExecutor` or `TaskExecutor` schedu
 ## Quick Start
 
 ```swift
-import Executor_Primitives
+import Executor
 
 // Thread-safe FIFO job queue:
 var queue = Executor.Job.Queue()
@@ -43,7 +43,7 @@ Add the dependency to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-primitives/swift-executor-primitives.git", branch: "main")
+    .package(url: "https://github.com/swift-molecules/swift-executor.git", branch: "main")
 ]
 ```
 
@@ -53,7 +53,7 @@ Add a product to your target:
 .target(
     name: "App",
     dependencies: [
-        .product(name: "Executor Primitives", package: "swift-executor-primitives")
+        .product(name: "Executor", package: "swift-executor")
     ]
 )
 ```
@@ -66,9 +66,9 @@ The package is pre-1.0 — depend on `branch: "main"` until `0.1.0` is tagged. R
 
 | Product | Contents | When to import |
 |---------|----------|----------------|
-| `Executor Primitives` | Umbrella — the `Executor` namespace and the job structures | Most consumers |
-| `Executor Job Queue Primitives` | `Executor.Job.Queue` — thread-safe FIFO | The FIFO queue only |
-| `Executor Job Deque Primitives` | `Executor.Job.Deque` — Chase-Lev work-stealing deque | The work-stealing deque only |
+| `Executor` | Umbrella — the `Executor` namespace and the job structures | Most consumers |
+| `Executor Job Queue` | `Executor.Job.Queue` — thread-safe FIFO | The FIFO queue only |
+| `Executor Job Deque` | `Executor.Job.Deque` — Chase-Lev work-stealing deque | The work-stealing deque only |
 
 ---
 
@@ -86,8 +86,8 @@ The package is pre-1.0 — depend on `branch: "main"` until `0.1.0` is tagged. R
 
 ## Related Packages
 
-- [`swift-deque-primitives`](https://github.com/swift-primitives/swift-deque-primitives) — the general-purpose double-ended queue (the executor deque is a specialized lock-free work-stealing variant over `UnownedJob`).
-- [`swift-clock-primitives`](https://github.com/swift-primitives/swift-clock-primitives) — the clock behind deadline-ordered scheduling.
+- [`swift-deque`](https://github.com/swift-molecules/swift-deque) — the general-purpose double-ended queue (the executor deque is a specialized lock-free work-stealing variant over `UnownedJob`).
+- [`swift-clock`](https://github.com/swift-molecules/swift-clock) — the clock behind deadline-ordered scheduling.
 
 ---
 

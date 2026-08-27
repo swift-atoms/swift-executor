@@ -2,7 +2,7 @@
 # Triaged by AI-assisted bulk pass (2026-04-29).
 description: "Executor — job-scheduling primitives: a thread-safe FIFO Job.Queue and a Chase-Lev work-stealing Job.Deque over UnownedJob, with a Shutdown.Flag."
 topics:
-  - primitives
+  - molecules
   - executor
 homepage: "https://swift-institute.org"
 readme:

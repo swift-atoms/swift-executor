@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "swift-executor-primitives",
+    name: "swift-executor",
     platforms: [
         .macOS(.v27),
         .iOS(.v27),
@@ -18,57 +18,57 @@ let package = Package(
             targets: ["Executor Primitive"]
         ),
         .library(
-            name: "Executor Job Primitives",
-            targets: ["Executor Job Primitives"]
+            name: "Executor Job",
+            targets: ["Executor Job"]
         ),
         .library(
-            name: "Executor Shutdown Primitives",
-            targets: ["Executor Shutdown Primitives"]
+            name: "Executor Shutdown",
+            targets: ["Executor Shutdown"]
         ),
         .library(
-            name: "Executor Wait Primitives",
-            targets: ["Executor Wait Primitives"]
-        ),
-
-        .library(
-            name: "Executor Job Queue Primitives",
-            targets: ["Executor Job Queue Primitives"]
-        ),
-        .library(
-            name: "Executor Job Deque Primitives",
-            targets: ["Executor Job Deque Primitives"]
+            name: "Executor Wait",
+            targets: ["Executor Wait"]
         ),
 
         .library(
-            name: "Executor Primitives",
-            targets: ["Executor Primitives"]
+            name: "Executor Job Queue",
+            targets: ["Executor Job Queue"]
         ),
         .library(
-            name: "Executor Primitives Test Support",
-            targets: ["Executor Primitives Test Support"]
+            name: "Executor Job Deque",
+            targets: ["Executor Job Deque"]
+        ),
+
+        .library(
+            name: "Executor",
+            targets: ["Executor"]
+        ),
+        .library(
+            name: "Executor Test Support",
+            targets: ["Executor Test Support"]
         ),
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-primitives/swift-buffer-ring-primitives.git",
+            url: "https://github.com/swift-molecules/swift-buffer-ring.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-clock-primitives.git",
-            branch: "main"
-        ),
-
-        .package(
-            url: "https://github.com/swift-primitives/swift-column-primitives.git",
-            branch: "main"
-        ),
-        .package(
-            url: "https://github.com/swift-primitives/swift-deque-primitives.git",
+            url: "https://github.com/swift-molecules/swift-clock.git",
             branch: "main"
         ),
 
         .package(
-            url: "https://github.com/swift-primitives/swift-index-primitives.git",
+            url: "https://github.com/swift-molecules/swift-column.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-molecules/swift-deque.git",
+            branch: "main"
+        ),
+
+        .package(
+            url: "https://github.com/swift-molecules/swift-index.git",
             branch: "main"
         ),
     ],
@@ -79,70 +79,70 @@ let package = Package(
             dependencies: []
         ),
         .target(
-            name: "Executor Job Primitives",
+            name: "Executor Job",
             dependencies: [
                 "Executor Primitive"
             ]
         ),
         .target(
-            name: "Executor Shutdown Primitives",
+            name: "Executor Shutdown",
             dependencies: [
                 "Executor Primitive"
             ]
         ),
         .target(
-            name: "Executor Wait Primitives",
+            name: "Executor Wait",
             dependencies: [
                 "Executor Primitive"
             ]
         ),
 
         .target(
-            name: "Executor Job Queue Primitives",
+            name: "Executor Job Queue",
             dependencies: [
-                "Executor Job Primitives",
-                .product(name: "Buffer Ring Primitive", package: "swift-buffer-ring-primitives"),
-                .product(name: "Column Primitives", package: "swift-column-primitives"),
-                .product(name: "Deque Primitives", package: "swift-deque-primitives"),
-                .product(name: "Index Primitives", package: "swift-index-primitives"),
+                "Executor Job",
+                .product(name: "Buffer Ring Primitive", package: "swift-buffer-ring"),
+                .product(name: "Column", package: "swift-column"),
+                .product(name: "Deque", package: "swift-deque"),
+                .product(name: "Index", package: "swift-index"),
             ]
         ),
 
         .target(
-            name: "Executor Job Deque Primitives",
+            name: "Executor Job Deque",
             dependencies: [
-                "Executor Job Primitives",
-                .product(name: "Index Primitives", package: "swift-index-primitives"),
+                "Executor Job",
+                .product(name: "Index", package: "swift-index"),
             ]
         ),
 
         .target(
-            name: "Executor Primitives",
+            name: "Executor",
             dependencies: [
                 "Executor Primitive",
-                "Executor Job Primitives",
-                "Executor Shutdown Primitives",
-                "Executor Wait Primitives",
-                "Executor Job Queue Primitives",
-                "Executor Job Deque Primitives",
+                "Executor Job",
+                "Executor Shutdown",
+                "Executor Wait",
+                "Executor Job Queue",
+                "Executor Job Deque",
 
             ]
         ),
 
         .target(
-            name: "Executor Primitives Test Support",
+            name: "Executor Test Support",
             dependencies: [
-                "Executor Primitives"
+                "Executor"
             ],
             path: "Tests/Support"
         ),
 
         .testTarget(
-            name: "Executor Primitives Tests",
+            name: "Executor Tests",
             dependencies: [
-                "Executor Primitives",
-                "Executor Primitives Test Support",
-                .product(name: "Clock Primitives", package: "swift-clock-primitives"),
+                "Executor",
+                "Executor Test Support",
+                .product(name: "Clock", package: "swift-clock"),
             ]
         ),
     ],

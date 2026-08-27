@@ -1,8 +1,8 @@
 public import Buffer_Ring_Primitive
-public import Column_Primitives
-public import Deque_Primitives
-public import Executor_Job_Primitives
-public import Index_Primitives
+public import Column
+public import Deque
+public import Executor_Job
+public import Index
 
 extension Executor.Job {
 

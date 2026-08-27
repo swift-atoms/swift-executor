@@ -1,8 +1,8 @@
-#if canImport(Executor_Job_Priority_Primitives)
+#if canImport(Executor_Job_Priority)
 
-    import Clock_Primitives
-    import Executor_Primitives
-    import Executor_Primitives_Test_Support
+    import Clock
+    import Executor
+    import Executor_Test_Support
     import Testing
 
     extension Executor.Job.Priority {

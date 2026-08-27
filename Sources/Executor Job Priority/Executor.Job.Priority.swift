@@ -1,8 +1,8 @@
-public import Clock_Primitives
-public import Comparison_Primitives
-public import Executor_Primitives_Core
-public import Heap_Primitives
-public import Index_Primitives
+public import Clock
+public import Comparison
+public import Executor_Core
+public import Heap
+public import Index
 
 extension Executor.Job {
 
