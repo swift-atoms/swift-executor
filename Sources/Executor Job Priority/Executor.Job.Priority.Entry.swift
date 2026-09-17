@@ -1,5 +1,4 @@
 public import Clock
-public import Comparison
 public import Executor_Core
 
 extension Executor.Job.Priority {
@@ -25,7 +24,7 @@ extension Executor.Job.Priority {
     }
 }
 
-extension Executor.Job.Priority.Entry: Equation.`Protocol` {
+extension Executor.Job.Priority.Entry: Swift.Equatable {
 
     @inlinable
     public static func == (lhs: borrowing Self, rhs: borrowing Self) -> Bool {
@@ -33,7 +32,7 @@ extension Executor.Job.Priority.Entry: Equation.`Protocol` {
     }
 }
 
-extension Executor.Job.Priority.Entry: Comparison.`Protocol` {
+extension Executor.Job.Priority.Entry: Swift.Comparable {
 
     @inlinable
     public static func < (lhs: borrowing Self, rhs: borrowing Self) -> Bool {

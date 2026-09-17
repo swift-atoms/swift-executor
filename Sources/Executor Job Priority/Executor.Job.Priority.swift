@@ -1,5 +1,4 @@
 public import Clock
-public import Comparison
 public import Executor_Core
 public import Heap
 public import Index
