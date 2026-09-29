@@ -1,5 +1,6 @@
+#if Clock
 public import Clock
-public import Executor_Core
+public import Executor_Job
 
 extension Executor.Job.Priority {
 
@@ -39,3 +40,4 @@ extension Executor.Job.Priority.Entry: Swift.Comparable {
         (lhs.deadline, lhs.sequence) < (rhs.deadline, rhs.sequence)
     }
 }
+#endif

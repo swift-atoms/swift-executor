@@ -1,7 +1,8 @@
-#if canImport(Executor_Job_Priority)
+#if Clock
 
     import Clock
     import Executor
+    import Executor_Job_Priority
     import Executor_Test_Support
     import Testing
 
@@ -26,7 +27,7 @@
             @Test
             func `pop on empty returns nil`() {
                 var pq = Executor.Job.Priority()
-                let now = Clock.Continuous.Instant(nanoseconds: 0)
+                let now = Clock.Continuous.Instant(offset: .zero)
                 let result = pq.pop(now: now)
                 #expect(result == nil)
             }
@@ -34,7 +35,7 @@
             @Test
             func `same-deadline jobs drain in FIFO insertion order`() {
                 var pq = Executor.Job.Priority()
-                let deadline = Clock.Continuous.Instant(nanoseconds: 0)
+                let deadline = Clock.Continuous.Instant(offset: .zero)
 
                 (0..<5).forEach { tag in
                     pq.schedule(unsafe UnownedJob.mock(tag), at: deadline)
@@ -50,7 +51,7 @@
             @Test
             func `earlier deadline fires before later deadline regardless of insertion order`() {
                 var pq = Executor.Job.Priority()
-                let now = Clock.Continuous.Instant(nanoseconds: 0)
+                let now = Clock.Continuous.Instant(offset: .zero)
                 let later = now.advanced(by: .milliseconds(100))
                 let earlier = now.advanced(by: .milliseconds(10))
 
@@ -67,7 +68,7 @@
             @Test
             func `deadline dominates FIFO sequence across mixed insertions`() {
                 var pq = Executor.Job.Priority()
-                let now = Clock.Continuous.Instant(nanoseconds: 0)
+                let now = Clock.Continuous.Instant(offset: .zero)
                 let early = now.advanced(by: .milliseconds(10))
                 let mid = now.advanced(by: .milliseconds(50))
 

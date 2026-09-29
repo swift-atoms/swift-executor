@@ -1,5 +1,6 @@
+#if Clock
 public import Clock
-public import Executor_Core
+public import Executor_Job
 public import Heap
 public import Index
 
@@ -14,7 +15,7 @@ extension Executor.Job {
 
         @inlinable
         public init() {
-            self._storage = Heap(order: .ascending)
+            self._storage = Heap()
             self._nextSequence = 0
         }
     }
@@ -37,13 +38,13 @@ extension Executor.Job.Priority {
 
     @inlinable
     public var peek: Clock.Continuous.Instant? {
-        _storage.peek?.deadline
+        _storage.isEmpty ? nil : _storage.min.deadline
     }
 
     @inlinable
     public mutating func pop(now: Clock.Continuous.Instant) -> UnownedJob? {
-        guard let head = _storage.peek, head.deadline <= now else { return nil }
-        return _storage.take?.job
+        guard !_storage.isEmpty, _storage.min.deadline <= now else { return nil }
+        return _storage.pop()?.job
     }
 
     @inlinable
@@ -51,9 +52,10 @@ extension Executor.Job.Priority {
         now: Clock.Continuous.Instant,
         _ body: (UnownedJob) -> Void
     ) {
-        while let head = _storage.peek, head.deadline <= now {
-            guard let popped = _storage.take else { break }
+        while !_storage.isEmpty, _storage.min.deadline <= now {
+            guard let popped = _storage.pop() else { break }
             body(popped.job)
         }
     }
 }
+#endif

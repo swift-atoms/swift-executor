@@ -1,5 +1,9 @@
 public import Buffer_Ring_Primitive
-public import Column
+public import Memory
+public import Memory_Allocator
+public import Storage
+public import Buffer
+
 public import Deque
 public import Executor_Job
 public import Index
@@ -8,11 +12,11 @@ extension Executor.Job {
 
     public struct Queue: ~Copyable {
         @usableFromInline
-        internal var _storage: Deque<Column.Ring<UnownedJob>>
+        internal var _storage: Deque<Buffer<Storage<Memory.Allocator<Memory.Heap>>.Contiguous<UnownedJob>>.Ring>
 
         @inlinable
         public init() {
-            self._storage = Deque<Column.Ring<UnownedJob>>()
+            self._storage = Deque<Buffer<Storage<Memory.Allocator<Memory.Heap>>.Contiguous<UnownedJob>>.Ring>()
 
             self._storage.reserve(try! .init(64))
         }
