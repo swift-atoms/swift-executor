@@ -87,6 +87,7 @@ let package = Package(
                 .product(name: "Clock", package: "swift-clock", condition: .when(traits: ["Clock"])),
                 .product(name: "Heap", package: "swift-heap", condition: .when(traits: ["Clock"])),
                 .product(name: "Index", package: "swift-index", condition: .when(traits: ["Clock"])),
+                .product(name: "Memory Allocator Protocol", package: "swift-memory-allocation", condition: .when(traits: ["Clock"])),
             ]
         ),
 

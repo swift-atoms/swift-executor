@@ -3,6 +3,7 @@ public import Clock
 public import Executor_Job
 public import Heap
 public import Index
+public import Memory_Allocator_Protocol
 
 extension Executor.Job {
 
