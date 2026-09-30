@@ -41,7 +41,7 @@
                     pq.schedule(unsafe UnownedJob.mock(tag), at: deadline)
                 }
 
-                let fireTime = deadline.advanced(by: .seconds(1))
+                let fireTime = Clock.Continuous.Instant(offset: deadline.offset + .seconds(1))
                 var observed: [Int] = []
                 pq.drain(now: fireTime) { unsafe observed.append($0.tag) }
 
@@ -52,13 +52,13 @@
             func `earlier deadline fires before later deadline regardless of insertion order`() {
                 var pq = Executor.Job.Priority()
                 let now = Clock.Continuous.Instant(offset: .zero)
-                let later = now.advanced(by: .milliseconds(100))
-                let earlier = now.advanced(by: .milliseconds(10))
+                let later = Clock.Continuous.Instant(offset: now.offset + .milliseconds(100))
+                let earlier = Clock.Continuous.Instant(offset: now.offset + .milliseconds(10))
 
                 pq.schedule(unsafe UnownedJob.mock(42), at: later)
                 pq.schedule(unsafe UnownedJob.mock(7), at: earlier)
 
-                let fireTime = now.advanced(by: .seconds(1))
+                let fireTime = Clock.Continuous.Instant(offset: now.offset + .seconds(1))
                 var observed: [Int] = []
                 pq.drain(now: fireTime) { unsafe observed.append($0.tag) }
 
@@ -69,8 +69,8 @@
             func `deadline dominates FIFO sequence across mixed insertions`() {
                 var pq = Executor.Job.Priority()
                 let now = Clock.Continuous.Instant(offset: .zero)
-                let early = now.advanced(by: .milliseconds(10))
-                let mid = now.advanced(by: .milliseconds(50))
+                let early = Clock.Continuous.Instant(offset: now.offset + .milliseconds(10))
+                let mid = Clock.Continuous.Instant(offset: now.offset + .milliseconds(50))
 
                 pq.schedule(unsafe UnownedJob.mock(100), at: mid)
                 pq.schedule(unsafe UnownedJob.mock(0), at: early)
@@ -78,7 +78,7 @@
                 pq.schedule(unsafe UnownedJob.mock(1), at: early)
                 pq.schedule(unsafe UnownedJob.mock(2), at: early)
 
-                let fireTime = now.advanced(by: .seconds(1))
+                let fireTime = Clock.Continuous.Instant(offset: now.offset + .seconds(1))
                 var observed: [Int] = []
                 pq.drain(now: fireTime) { unsafe observed.append($0.tag) }
 
