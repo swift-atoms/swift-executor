@@ -50,7 +50,7 @@ let package = Package(
         ),
     ],
     traits: [
-        .trait(name: "Clock", description: "Deadline-ordered job scheduling."),
+        .trait(name: "Clock", description: "Deadline-ordered job scheduling.")
     ],
     dependencies: [
         .package(url: "https://github.com/swift-atoms/swift-heap.git", branch: "main"),

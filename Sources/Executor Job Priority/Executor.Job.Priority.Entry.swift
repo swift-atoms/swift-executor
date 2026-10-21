@@ -1,43 +1,43 @@
 #if Clock
-public import Clock
-public import Executor_Job
+    public import Clock
+    public import Executor_Job
 
-extension Executor.Job.Priority {
-
-    @usableFromInline
-    package struct Entry: Sendable {
+    extension Executor.Job.Priority {
 
         @usableFromInline
-        package let job: UnownedJob
+        package struct Entry: Sendable {
 
-        @usableFromInline
-        package let deadline: Clock.Continuous.Instant
+            @usableFromInline
+            package let job: UnownedJob
 
-        @usableFromInline
-        package let sequence: UInt64
+            @usableFromInline
+            package let deadline: Clock.Continuous.Instant
 
-        @usableFromInline
-        package init(job: UnownedJob, deadline: Clock.Continuous.Instant, sequence: UInt64) {
-            self.job = job
-            self.deadline = deadline
-            self.sequence = sequence
+            @usableFromInline
+            package let sequence: UInt64
+
+            @usableFromInline
+            package init(job: UnownedJob, deadline: Clock.Continuous.Instant, sequence: UInt64) {
+                self.job = job
+                self.deadline = deadline
+                self.sequence = sequence
+            }
         }
     }
-}
 
-extension Executor.Job.Priority.Entry: Swift.Equatable {
+    extension Executor.Job.Priority.Entry: Swift.Equatable {
 
-    @inlinable
-    public static func == (lhs: borrowing Self, rhs: borrowing Self) -> Bool {
-        (lhs.deadline, lhs.sequence) == (rhs.deadline, rhs.sequence)
+        @inlinable
+        public static func == (lhs: borrowing Self, rhs: borrowing Self) -> Bool {
+            (lhs.deadline, lhs.sequence) == (rhs.deadline, rhs.sequence)
+        }
     }
-}
 
-extension Executor.Job.Priority.Entry: Swift.Comparable {
+    extension Executor.Job.Priority.Entry: Swift.Comparable {
 
-    @inlinable
-    public static func < (lhs: borrowing Self, rhs: borrowing Self) -> Bool {
-        (lhs.deadline, lhs.sequence) < (rhs.deadline, rhs.sequence)
+        @inlinable
+        public static func < (lhs: borrowing Self, rhs: borrowing Self) -> Bool {
+            (lhs.deadline, lhs.sequence) < (rhs.deadline, rhs.sequence)
+        }
     }
-}
 #endif

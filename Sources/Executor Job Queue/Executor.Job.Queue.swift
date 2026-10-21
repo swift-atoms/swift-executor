@@ -1,13 +1,12 @@
+public import Buffer
 public import Buffer_Ring_Primitive
+public import Deque
+public import Executor_Job
+public import Index
 public import Memory
 public import Memory_Allocator
 public import Memory_Allocator_Protocol
 public import Storage
-public import Buffer
-
-public import Deque
-public import Executor_Job
-public import Index
 
 extension Executor.Job {
 
@@ -19,7 +18,11 @@ extension Executor.Job {
         public init() {
             self._storage = Deque<Buffer<Storage<Memory.Allocator<Memory.Heap>>.Contiguous<UnownedJob>>.Ring>()
 
-            self._storage.reserve(try! .init(64))
+            do {
+                self._storage.reserve(try .init(64))
+            } catch {
+                preconditionFailure("A constant non-negative capacity is representable: \(error)")
+            }
         }
     }
 }

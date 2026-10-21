@@ -46,7 +46,11 @@ extension Executor.Job.Deque {
         let b = _bottom.load(ordering: .relaxed)
         let t = _top.load(ordering: .relaxed)
 
-        return try! .init(max(0, b - t))
+        do {
+            return try .init(max(0, b - t))
+        } catch {
+            preconditionFailure("Count is non-negative by construction: \(error)")
+        }
     }
 
     @inlinable
