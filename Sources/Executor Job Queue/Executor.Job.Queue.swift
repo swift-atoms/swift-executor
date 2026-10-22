@@ -1,4 +1,3 @@
-public import _Concurrency
 public import Buffer
 public import Buffer_Ring_Primitive
 public import Deque
@@ -8,6 +7,7 @@ public import Memory
 public import Memory_Allocator
 public import Memory_Allocator_Protocol
 public import Storage
+public import _Concurrency
 
 extension Executor.Job {
 

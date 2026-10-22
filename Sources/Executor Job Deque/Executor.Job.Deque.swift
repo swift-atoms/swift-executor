@@ -1,7 +1,7 @@
-public import _Concurrency
 public import Executor_Job
 public import Index
 public import Synchronization
+public import _Concurrency
 
 extension Executor.Job {
 

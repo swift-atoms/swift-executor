@@ -1,7 +1,7 @@
-import _Concurrency
 import Executor_Test_Support
 import Synchronization
 import Testing
+import _Concurrency
 
 private final class HeapHarness: @unchecked Sendable {
     let deque: Executor.Job.Deque
