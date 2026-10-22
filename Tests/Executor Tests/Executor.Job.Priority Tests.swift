@@ -1,5 +1,6 @@
 #if Clock
 
+    import _Concurrency
     import Clock
     import Executor
     import Executor_Job_Priority

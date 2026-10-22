@@ -1,3 +1,4 @@
+public import _Concurrency
 public import Executor_Job
 public import Index
 public import Synchronization
@@ -49,7 +50,7 @@ extension Executor.Job.Deque {
         do {
             return try .init(max(0, b - t))
         } catch {
-            preconditionFailure("Count is non-negative by construction: \(error)")
+            preconditionFailure("Count is non-negative by construction")
         }
     }
 

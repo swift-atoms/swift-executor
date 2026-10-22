@@ -1,3 +1,4 @@
+public import _Concurrency
 public import Buffer
 public import Buffer_Ring_Primitive
 public import Deque
@@ -21,7 +22,7 @@ extension Executor.Job {
             do {
                 self._storage.reserve(try .init(64))
             } catch {
-                preconditionFailure("A constant non-negative capacity is representable: \(error)")
+                preconditionFailure("A constant non-negative capacity is representable")
             }
         }
     }
