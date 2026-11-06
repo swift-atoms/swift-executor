@@ -98,26 +98,26 @@ let package = Package(
         .target(
             name: "Executor Job",
             dependencies: [
-                "Executor Primitive"
+                .target(name: "Executor Primitive")
             ]
         ),
         .target(
             name: "Executor Shutdown",
             dependencies: [
-                "Executor Primitive"
+                .target(name: "Executor Primitive")
             ]
         ),
         .target(
             name: "Executor Wait",
             dependencies: [
-                "Executor Primitive"
+                .target(name: "Executor Primitive")
             ]
         ),
 
         .target(
             name: "Executor Job Queue",
             dependencies: [
-                "Executor Job",
+                .target(name: "Executor Job"),
                 .product(name: "Buffer Ring Primitive", package: "swift-buffer-ring"),
                 .product(name: "Deque", package: "swift-deque"),
                 .product(name: "Index", package: "swift-index"),
@@ -138,7 +138,7 @@ let package = Package(
         .target(
             name: "Executor Job Deque",
             dependencies: [
-                "Executor Job",
+                .target(name: "Executor Job"),
                 .product(name: "Index", package: "swift-index"),
             ]
         ),
@@ -146,12 +146,12 @@ let package = Package(
         .target(
             name: "Executor",
             dependencies: [
-                "Executor Primitive",
-                "Executor Job",
-                "Executor Shutdown",
-                "Executor Wait",
-                "Executor Job Queue",
-                "Executor Job Deque",
+                .target(name: "Executor Primitive"),
+                .target(name: "Executor Job"),
+                .target(name: "Executor Shutdown"),
+                .target(name: "Executor Wait"),
+                .target(name: "Executor Job Queue"),
+                .target(name: "Executor Job Deque"),
                 .target(name: "Executor Job Priority", condition: .when(traits: ["Clock"])),
 
             ]
@@ -160,7 +160,7 @@ let package = Package(
         .target(
             name: "Executor Test Support",
             dependencies: [
-                "Executor"
+                .target(name: "Executor")
             ],
             path: "Tests/Support"
         ),
@@ -168,8 +168,8 @@ let package = Package(
         .testTarget(
             name: "Executor Tests",
             dependencies: [
-                "Executor",
-                "Executor Test Support",
+                .target(name: "Executor"),
+                .target(name: "Executor Test Support"),
                 .target(name: "Executor Job Priority", condition: .when(traits: ["Clock"])),
                 .product(name: "Clock", package: "swift-clock"),
             ]
