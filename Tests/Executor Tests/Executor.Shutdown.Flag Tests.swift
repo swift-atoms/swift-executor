@@ -1,7 +1,9 @@
 import Executor
 import Testing
 
-extension Executor.Shutdown.Flag {
+enum `Executor.Shutdown.Flag Tests` {}
+
+extension `Executor.Shutdown.Flag Tests` {
     @Suite
     struct Test {
 

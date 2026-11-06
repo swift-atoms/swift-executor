@@ -14,7 +14,9 @@ private final class HeapHarness: @unchecked Sendable {
     }
 }
 
-extension Executor.Job.Deque {
+enum `Executor.Job.Deque Tests` {}
+
+extension `Executor.Job.Deque Tests` {
     @Suite
     struct Test {
 

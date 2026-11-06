@@ -1,7 +1,9 @@
 import Executor
 import Testing
 
-extension Executor.Job.Queue {
+enum `Executor.Job.Queue Tests` {}
+
+extension `Executor.Job.Queue Tests` {
     @Suite
     struct Test {
 
