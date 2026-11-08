@@ -171,7 +171,7 @@ let package = Package(
                 .target(name: "Executor"),
                 .target(name: "Executor Test Support"),
                 .target(name: "Executor Job Priority", condition: .when(traits: ["Clock"])),
-                .product(name: "Clock", package: "swift-clock", condition: .when(traits: ["Clock"])),
+                .product(name: "Clock", package: "swift-clock"),
             ]
         ),
     ],
