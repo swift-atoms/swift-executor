@@ -31,7 +31,7 @@ extension `Executor.Shutdown.Flag Tests` {
             let value = flag.isSet
             #expect(value)
         }
-    
+
         final class Channel: Sendable {
             let payload = Atomic<Int>(0)
             let flag = Executor.Shutdown.Flag()
