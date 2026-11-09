@@ -17,7 +17,7 @@ extension Executor.Shutdown.Flag {
 
     @inlinable
     public var isSet: Bool {
-        _atomic.load(ordering: .relaxed)
+        _atomic.load(ordering: .acquiring)
     }
 
     @inlinable
