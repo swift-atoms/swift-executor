@@ -37,19 +37,17 @@ extension `Executor.Shutdown.Flag Tests` {
             let flag = Executor.Shutdown.Flag()
         }
 
-        @Test
-        func `seeing the flag set makes the setter's earlier writes visible`() async {
-            for round in 1...1_000 {
-                let channel = Channel()
-                async let observed: Int = {
-                    while !channel.flag.isSet { await Task.yield() }
-                    return channel.payload.load(ordering: .relaxed)
-                }()
-                channel.payload.store(round, ordering: .relaxed)
-                channel.flag.set()
-                let value = await observed
-                #expect(value == round)
-            }
+        @Test(arguments: 1...1_000)
+        func `seeing the flag set makes the setter's earlier writes visible`(round: Int) async {
+            let channel = Channel()
+            async let observed: Int = {
+                while !channel.flag.isSet { await Task.yield() }
+                return channel.payload.load(ordering: .relaxed)
+            }()
+            channel.payload.store(round, ordering: .relaxed)
+            channel.flag.set()
+            let value = await observed
+            #expect(value == round)
         }
     }
 }
