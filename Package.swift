@@ -41,6 +41,10 @@ let package = Package(
         ),
 
         .library(
+            name: "Executor Hosted",
+            targets: ["Executor Hosted"]
+        ),
+        .library(
             name: "Executor",
             targets: ["Executor"]
         ),
@@ -144,8 +148,18 @@ let package = Package(
         ),
 
         .target(
+            name: "Executor Hosted",
+            dependencies: [
+                .target(name: "Executor Primitive"),
+                .target(name: "Executor Job"),
+                .target(name: "Executor Job Queue"),
+            ]
+        ),
+
+        .target(
             name: "Executor",
             dependencies: [
+                .target(name: "Executor Hosted"),
                 .target(name: "Executor Primitive"),
                 .target(name: "Executor Job"),
                 .target(name: "Executor Shutdown"),

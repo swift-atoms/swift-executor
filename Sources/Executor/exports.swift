@@ -1,3 +1,4 @@
+@_exported public import Executor_Hosted
 @_exported public import Executor_Job
 @_exported public import Executor_Job_Deque
 @_exported public import Executor_Job_Queue
