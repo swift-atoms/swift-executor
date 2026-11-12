@@ -2,6 +2,7 @@ internal import Executor_Job
 internal import Executor_Job_Queue
 public import Executor_Primitive
 internal import Synchronization
+public import _Concurrency
 
 extension Executor {
 
